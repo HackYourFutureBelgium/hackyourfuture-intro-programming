@@ -28,6 +28,7 @@ A 12-week curriculum covering programming fundamentals, data structures, and web
 We use a GitHub Project Board to track student progress:
 
 1. **View the board**: Go to the [Projects tab](https://github.com/orgs/HackYourFutureBelgium/projects/14/views/1)
+
 2. **Student workflow**:
 
    - Create a weekly issue using the template
