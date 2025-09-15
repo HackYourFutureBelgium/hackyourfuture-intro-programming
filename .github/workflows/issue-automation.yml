@@ -1,0 +1,31 @@
+name: Issue Automation
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  automate-project-board:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Move issue based on label
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // Logic to move issues between columns based on labels
+            const issue = context.payload.issue;
+            const labels = issue.labels.map(label => label.name);
+            const columnMapping = {
+              'In Progress': 'Doing',
+              'Needs Review': 'Review',
+              'Done': 'Completed'
+            };
+            for (const [oldColumn, newColumn] of Object.entries(columnMapping)) {
+              if (labels.includes(oldColumn)) {
+                await github.projects.moveCard({
+                  card_id: context.payload.card.id,
+                  column_id: newColumn
+                });
+              }
+            }
+            console.log(`Issue #${issue.number} moved based on labels: ${labels.join(', ')}`);
