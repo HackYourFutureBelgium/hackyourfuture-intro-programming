@@ -2,8 +2,8 @@
 name: Week 1 - Version Control
 about: Track progress for Version Control module
 title: "[WEEK 1] - Student Name"
-labels: week1, check-in
-assignees: Galal
+labels: ''
+assignees: ''
 
 ---
 
