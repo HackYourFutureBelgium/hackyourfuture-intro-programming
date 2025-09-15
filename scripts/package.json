@@ -1,0 +1,19 @@
+{
+    "name": "itp-scripts",
+    "version": "1.0.0",
+    "description": "Utility scripts for Intro to Programming course",
+    "main": "setup-project-board.js",
+    "scripts": {
+        "setup-project": "node setup-project-board.js"
+    },
+    "dependencies": {
+        "@octokit/rest": "^19.0.7"
+    },
+    "keywords": [
+        "github",
+        "education",
+        "automation"
+    ],
+    "author": "ITP Coaches",
+    "license": "MIT"
+}

@@ -1,0 +1,14 @@
+# Project board template for student progress tracking
+name: Student Progress Tracker
+description: Track student progress through the 12-week curriculum
+columns:
+  - name: Not Started
+    description: Modules that students haven't started yet
+  - name: In Progress
+    description: Students are currently working on these modules
+  - name: Review Needed
+    description: Waiting for coach feedback
+  - name: Completed
+    description: Successfully finished modules
+  - name: Blocked
+    description: Students need help with these modules

@@ -1,0 +1,73 @@
+name: Move project cards based on labels
+on:
+  issues:
+    types: [labeled, unlabeled]
+
+jobs:
+  automate-project-board:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Move issue based on labels
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { issue } = context.payload;
+            const projectId = 1; // Replace with your actual project number
+            const columnMap = {
+              'week1': 'In Progress',
+              'week2': 'In Progress',
+              'week3': 'In Progress',
+              'week4': 'In Progress',
+              'week5': 'In Progress',
+              'week6': 'In Progress',
+              'week7': 'In Progress',
+              'week8': 'In Progress',
+              'week9': 'In Progress',
+              'week10': 'In Progress',
+              'week11': 'In Progress',
+              'week12': 'In Progress',
+              'reviewed': 'Review Needed',
+              'completed': 'Completed',
+              'help-wanted': 'Blocked'
+            };
+
+            // Get project columns
+            const columns = await github.rest.projects.listColumns({
+              project_id: projectId
+            });
+
+            // Find the appropriate column
+            let targetColumnId = null;
+            for (const [label, columnName] of Object.entries(columnMap)) {
+              if (issue.labels.some(l => l.name === label)) {
+                const column = columns.data.find(c => c.name === columnName);
+                if (column) {
+                  targetColumnId = column.id;
+                  break;
+                }
+              }
+            }
+
+            // If no specific label matched, use "Not Started"
+            if (!targetColumnId) {
+              const column = columns.data.find(c => c.name === 'Not Started');
+              targetColumnId = column.id;
+            }
+
+            // Move the card
+            const cards = await github.rest.projects.listCards({
+              column_id: columns.data[0].id, // Start with first column
+            });
+
+            const card = cards.data.find(c => c.content_url === issue.html_url);
+            if (card) {
+              await github.rest.projects.moveCard({
+                card_id: card.id,
+                position: 'bottom',
+                column_id: targetColumnId
+              });
+            }

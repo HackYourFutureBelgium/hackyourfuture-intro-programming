@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Simple script to guide coaches through manual project board setup
+
+echo "🎯 Student Progress Tracker Setup Guide"
+echo "========================================"
+echo ""
+echo "Please follow these manual steps:"
+echo ""
+echo "1. Go to your GitHub repository"
+echo "2. Click on the 'Projects' tab"
+echo "3. Click 'New project'"
+echo "4. Choose 'Start from scratch'"
+echo "5. Name it 'Student Progress Tracker'"
+echo "6. Add these columns in order:"
+echo "   - Not Started"
+echo "   - In Progress"
+echo "   - Review Needed"
+echo "   - Completed"
+echo "   - Blocked"
+echo "7. Click the '⚡' (Automation) button"
+echo "8. Set 'To do' → 'Not Started'"
+echo "9. Set 'In progress' → 'In Progress'"
+echo "10. Set 'Done' → 'Completed'"
+echo "11. Enable 'Auto-archive' for closed items"
+echo ""
+echo "The automation workflows will handle the rest!"
